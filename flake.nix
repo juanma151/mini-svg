@@ -1,5 +1,5 @@
 {
-  description = "mini-svg — Mini librería educativa SVG";
+  description = "mini-svg — devshell reproducible (nixos-unstable + python313)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -15,40 +15,40 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
+        # Si en tu snapshot no existe python313, cambia a python312.
         python = pkgs.python313;
       in
       {
         default = pkgs.mkShell {
-          name = "mini-svg-devshell";
+          name = "mini-svg";
 
           packages = [
             python
             python.pkgs.pip
             python.pkgs.setuptools
             python.pkgs.wheel
-
-            # Dev tools
             python.pkgs.pytest
             python.pkgs.ruff
             python.pkgs.black
             python.pkgs.mypy
+            python.pkgs.build
+            python.pkgs.twine
+            pkgs.pipenv
+            pkgs.git
           ];
 
-          # Aquí está la clave
           shellHook = ''
-            export PYTHONPATH="$PWD/src''${PYTHONPATH:+:}$PYTHONPATH"
+            # Tu paquete Python vive aquí:
+            export MINI_SVG_PROJECT_ROOT="$PWD/src/mini_svg"
+            export PYTHONPATH="$MINI_SVG_PROJECT_ROOT/src''${PYTHONPATH:+:}$PYTHONPATH"
 
-            echo "mini-svg devShell listo"
-            echo "Python: $(python --version)"
-            echo "Import test:"
-            python - <<EOF
-from mini_svg import v1
-print("mini_svg import OK")
-EOF
+            echo "✅ mini-svg devShell listo"
+            echo "   Project root: $MINI_SVG_PROJECT_ROOT"
+            echo "   PYTHONPATH:   $PYTHONPATH"
+            python -c "from mini_svg import v1; print('mini_svg import OK')"
           '';
         };
       }
     );
   };
 }
-

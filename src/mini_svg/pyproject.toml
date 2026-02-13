@@ -3,14 +3,14 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "svg-simple"
+name = "mini-svg"
 version = "0.1.0"
 description = "Mini librería educativa para generar SVG con Python"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
-authors = [{name="Tu Nombre", email="tu@email.com"}]
-keywords = ["svg", "education", "python", "inkscape"]
+authors = [{name="Juanma"}]
+keywords = ["svg", "education", "inkscape"]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
