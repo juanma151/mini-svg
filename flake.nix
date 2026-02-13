@@ -15,7 +15,7 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        # Si en tu snapshot no existe python313, cambia a python312.
+        # Si tu snapshot no tiene python313, cambia a python312.
         python = pkgs.python313;
       in
       {
@@ -38,11 +38,18 @@
           ];
 
           shellHook = ''
+            # Subproyecto Python (con guion) vive aquí:
             export MINI_SVG_PROJECT_ROOT="$PWD/src/mini-svg"
-            export PYTHONPATH="$MINI_SVG_PROJECT_ROOT/src${PYTHONPATH:+:}$PYTHONPATH"
+
+            # El paquete importable "mini_svg" está dentro de:
+            #   $MINI_SVG_PROJECT_ROOT/src/mini_svg
+            # Por tanto, PYTHONPATH debe incluir:
+            #   $MINI_SVG_PROJECT_ROOT/src
+            export PYTHONPATH="$MINI_SVG_PROJECT_ROOT/src''${PYTHONPATH:+:}$PYTHONPATH"
 
             echo "✅ mini-svg devShell listo"
             echo "   Project root: $MINI_SVG_PROJECT_ROOT"
+            echo "   PYTHONPATH:   $PYTHONPATH"
             python -c "from mini_svg import v2; print('mini_svg import OK')"
           '';
         };
@@ -50,3 +57,4 @@
     );
   };
 }
+

@@ -7,7 +7,7 @@ Pensada para practicar bucles, condicionales y funciones creando arte geométric
 
 ## Estructura del repo
 
-```
+@@@
 mini-svg/
   flake.nix
   src/
@@ -20,7 +20,7 @@ mini-svg/
           v1.py
           v2.py
           v3.py
-```
+@@@
 
 Notas:
 - El subproyecto se llama `mini-svg` (con guion).
@@ -32,21 +32,21 @@ Notas:
 
 Desde la raíz del repo:
 
-```
+@@@
 nix develop
-```
+@@@
 
 Prueba rápida:
 
-```
+@@@
 python -c "from mini_svg import v2; print('ok')"
-```
+@@@
 
 El devShell exporta `PYTHONPATH` apuntando a:
 
-```
+@@@
 src/mini-svg/src
-```
+@@@
 
 Así puedes importar `mini_svg` sin instalar nada.
 
@@ -56,32 +56,32 @@ Así puedes importar `mini_svg` sin instalar nada.
 
 El “root” del proyecto Python está aquí:
 
-```
+@@@
 cd src/mini-svg
-```
+@@@
 
 ### pip (editable)
 
-```
+@@@
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -U pip
 pip install -e .
-```
+@@@
 
 Prueba:
 
-```
+@@@
 python -c "from mini_svg import v3; print('ok')"
-```
+@@@
 
 ### pipenv
 
-```
+@@@
 pipenv --python 3.13
 pipenv install --dev
 pipenv run python -c "from mini_svg import v2; print('ok')"
-```
+@@@
 
 ---
 
@@ -91,9 +91,9 @@ pipenv run python -c "from mini_svg import v2; print('ok')"
 - svg_begin, svg_end, save_svg
 - line, rect, circle
 
-```
+@@@
 from mini_svg import v1
-```
+@@@
 
 ### v2 — Intermedio
 Añade:
@@ -102,23 +102,23 @@ Añade:
 - star (n puntas, bbox, rotación)
 - cubic_bezier (una curva cúbica)
 
-```
+@@@
 from mini_svg import v2
-```
+@@@
 
 ### v3 — Avanzado
 Añade:
 - bezier_path_cubic (varios segmentos Bézier; introduce listas)
 
-```
+@@@
 from mini_svg import v3
-```
+@@@
 
 ---
 
 ## Ejemplo mínimo
 
-```
+@@@
 from mini_svg import v1
 
 parts = [v1.svg_begin(400, 200)]
@@ -126,7 +126,7 @@ parts.append(v1.circle(200, 100, 40, fill="red"))
 parts.append(v1.svg_end())
 
 v1.save_svg("demo.svg", parts)
-```
+@@@
 
 Abre `demo.svg` con Inkscape.
 

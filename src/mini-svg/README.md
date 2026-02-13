@@ -11,7 +11,7 @@ Pensada para practicar bucles, condicionales y funciones creando arte geométric
 mini-svg/
   flake.nix
   src/
-    mini_svg/
+    mini-svg/
       pyproject.toml
       README.md
       src/
@@ -21,6 +21,10 @@ mini-svg/
           v2.py
           v3.py
 ```
+
+Notas:
+- El subproyecto se llama `mini-svg` (con guion).
+- El paquete importable de Python se llama `mini_svg` (con guion bajo) porque Python no permite guiones en imports.
 
 ---
 
@@ -38,16 +42,22 @@ Prueba rápida:
 python -c "from mini_svg import v2; print('ok')"
 ```
 
-(El devShell ya exporta `PYTHONPATH` apuntando a `src/mini_svg/src`.)
+El devShell exporta `PYTHONPATH` apuntando a:
+
+```
+src/mini-svg/src
+```
+
+Así puedes importar `mini_svg` sin instalar nada.
 
 ---
 
-## Desarrollo con pip / pipenv (sin Nix)
+## Desarrollo sin Nix (pip / pipenv)
 
 El “root” del proyecto Python está aquí:
 
 ```
-cd src/mini_svg
+cd src/mini-svg
 ```
 
 ### pip (editable)
@@ -57,6 +67,12 @@ python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -U pip
 pip install -e .
+```
+
+Prueba:
+
+```
+python -c "from mini_svg import v3; print('ok')"
 ```
 
 ### pipenv
@@ -108,6 +124,7 @@ from mini_svg import v1
 parts = [v1.svg_begin(400, 200)]
 parts.append(v1.circle(200, 100, 40, fill="red"))
 parts.append(v1.svg_end())
+
 v1.save_svg("demo.svg", parts)
 ```
 
