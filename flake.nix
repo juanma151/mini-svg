@@ -38,14 +38,12 @@
           ];
 
           shellHook = ''
-            # Tu paquete Python vive aquí:
             export MINI_SVG_PROJECT_ROOT="$PWD/src/mini_svg"
             export PYTHONPATH="$MINI_SVG_PROJECT_ROOT/src''${PYTHONPATH:+:}$PYTHONPATH"
 
             echo "✅ mini-svg devShell listo"
             echo "   Project root: $MINI_SVG_PROJECT_ROOT"
-            echo "   PYTHONPATH:   $PYTHONPATH"
-            python -c "from mini_svg import v1; print('mini_svg import OK')"
+            python -c "from mini_svg import v2; print('mini_svg import OK')"
           '';
         };
       }

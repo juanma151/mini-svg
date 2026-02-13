@@ -1,22 +1,16 @@
-"""mini_svg_v3.py — Mini SVG (v3)
+"""
+mini_svg.v3 — Avanzado: añade rutas Bézier múltiples (listas de segmentos).
 
-v3 = v2 + paths Bézier múltiples (lista de segmentos)
-- Importa todo lo de v2 (no repite código)
-- Añade bezier_path_cubic()
+Reutiliza TODO lo de v2 (y por extensión v1).
 """
 
 from __future__ import annotations
 from typing import List, Optional, Tuple
 
-# Reexportamos todo lo de v2
-from mini_svg_v2 import (  # noqa: F401
-    svg_begin, svg_end, save_svg,
-    _style,
-    line, rect, circle,
-    text, group,
-    regular_polygon, star,
-    cubic_bezier,
-)
+from .v2 import *  # reexporta todo lo de v2 (incluye v1)
+from .v2 import _style  # para construir el <path> con estilo
+
+__all__ = list(globals().get("__all__", [])) + ["bezier_path_cubic"]
 
 
 def bezier_path_cubic(
@@ -29,10 +23,9 @@ def bezier_path_cubic(
     fill: str = "none",
     opacity: Optional[float] = None
 ) -> str:
-    """Ruta Bézier cúbica con varios segmentos.
-
+    """
     start = (x0,y0)
-    segments = [(cx1,cy1,cx2,cy2,x,y), ...]
+    segments = [(cx1,cy1,cx2,cy2,x,y), ...]  # cada tupla añade un 'C'
     """
     x0, y0 = start
     d_parts = [f"M {x0:.2f},{y0:.2f}"]
@@ -43,3 +36,4 @@ def bezier_path_cubic(
 
     d = " ".join(d_parts)
     return f'<path d="{d}"{_style(stroke=stroke, stroke_width=stroke_width, fill=fill, opacity=opacity)} />\n'
+
