@@ -38,8 +38,8 @@
           ];
 
           shellHook = ''
-            export MINI_SVG_PROJECT_ROOT="$PWD/src/mini_svg"
-            export PYTHONPATH="$MINI_SVG_PROJECT_ROOT/src''${PYTHONPATH:+:}$PYTHONPATH"
+            export MINI_SVG_PROJECT_ROOT="$PWD/src/mini-svg"
+            export PYTHONPATH="$MINI_SVG_PROJECT_ROOT/src${PYTHONPATH:+:}$PYTHONPATH"
 
             echo "✅ mini-svg devShell listo"
             echo "   Project root: $MINI_SVG_PROJECT_ROOT"
